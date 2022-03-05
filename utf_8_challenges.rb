@@ -23,6 +23,29 @@ class Utf8Challenges < Minitest::Test
       assert string.bytes == expected_bytes
     end
   end
+
+  describe 'ISO-8859-1' do
+    # https://en.wikipedia.org/wiki/ISO/IEC_8859-1#Code_page_layout
+    ISO_8859_1 = Encoding::ISO_8859_1
+
+    specify 'bytes to ISO-8859-1 string' do
+      skip
+
+      bytes = [0x63, 0x61, 0x66, 0xE9]
+      expected_string = ''.encode(ISO_8859_1) # TODO
+
+      assert string_from_bytes(bytes, encoding: ISO_8859_1) == expected_string
+    end
+
+    specify 'ISO-8859-1 string to bytes' do
+      skip
+
+      string = '£50'.encode(ISO_8859_1)
+      expected_bytes = [] # TODO
+
+      assert string.bytes == expected_bytes
+    end
+  end
 end
 
 # https://docs.ruby-lang.org/en/3.1/Array.html#method-i-pack
