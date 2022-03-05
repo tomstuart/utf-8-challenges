@@ -97,6 +97,29 @@ class Utf8Challenges < Minitest::Test
       assert string.bytes == expected_bytes
     end
   end
+
+  describe 'UTF-8' do
+    # https://en.wikipedia.org/wiki/UTF-8
+    UTF_8 = Encoding::UTF_8
+
+    specify 'bytes to UTF-8 string' do
+      skip
+
+      bytes = [0x49, 0x20, 0xE2, 0x9D, 0xA4, 0x20, 0xF0, 0x9F, 0x8D, 0x95]
+      expected_string = ''.encode(UTF_8) # TODO
+
+      assert string_from_bytes(bytes, encoding: UTF_8) == expected_string
+    end
+
+    specify 'UTF-8 string to bytes' do
+      skip
+
+      string = 'Voilà! 🎉'.encode(UTF_8)
+      expected_bytes = [] # TODO
+
+      assert string.bytes == expected_bytes
+    end
+  end
 end
 
 # https://docs.ruby-lang.org/en/3.1/Array.html#method-i-pack
