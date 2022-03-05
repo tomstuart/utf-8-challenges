@@ -46,11 +46,37 @@ class Utf8Challenges < Minitest::Test
       assert string.bytes == expected_bytes
     end
   end
+
+  describe 'Unicode' do
+    specify 'Unicode string to code points' do
+      skip
+
+      # tip: https://www.fileformat.info/info/unicode/char/search.htm
+      codepoints = [0x03C0, 0x20, 0x2248, 0x20, 0x33]
+      expected_string = '' # TODO
+
+      assert string_from_codepoints(codepoints) == expected_string
+    end
+
+    specify 'code points to Unicode string' do
+      skip
+
+      string = '⌘C ⌘V'
+      expected_codepoints = [] # TODO
+
+      assert string.codepoints == expected_codepoints
+    end
+  end
 end
 
 # https://docs.ruby-lang.org/en/3.1/Array.html#method-i-pack
 BYTES_PACK_TEMPLATE = 'C*' # zero or more unsigned 8-bit integers
+CODEPOINTS_PACK_TEMPLATE = 'U*' # zero or more Unicode code points
 
 def string_from_bytes(bytes, encoding:)
   bytes.pack(BYTES_PACK_TEMPLATE).force_encoding(encoding)
+end
+
+def string_from_codepoints(codepoints)
+  codepoints.pack(CODEPOINTS_PACK_TEMPLATE)
 end
