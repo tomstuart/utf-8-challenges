@@ -67,6 +67,36 @@ class Utf8Challenges < Minitest::Test
       assert string.codepoints == expected_codepoints
     end
   end
+
+  describe 'UTF-32' do
+    # https://en.wikipedia.org/wiki/UTF-32
+    UTF_32 = Encoding::UTF_32BE # “BE” is “big-endian”, i.e. most significant byte first
+
+    specify 'bytes to UTF-32 string' do
+      skip
+
+      bytes =
+        [
+          0x00, 0x00, 0x03, 0xC0,
+          0x00, 0x00, 0x00, 0x20,
+          0x00, 0x00, 0x22, 0x48,
+          0x00, 0x00, 0x00, 0x20,
+          0x00, 0x00, 0x00, 0x33
+        ]
+      expected_string = ''.encode(UTF_32) # TODO
+
+      assert string_from_bytes(bytes, encoding: UTF_32) == expected_string
+    end
+
+    specify 'UTF-32 string to bytes' do
+      skip
+
+      string = '⌘C ⌘V'.encode(UTF_32)
+      expected_bytes = [] # TODO
+
+      assert string.bytes == expected_bytes
+    end
+  end
 end
 
 # https://docs.ruby-lang.org/en/3.1/Array.html#method-i-pack
