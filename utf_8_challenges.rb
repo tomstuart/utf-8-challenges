@@ -42,7 +42,7 @@ class Utf8Challenges < Minitest::Test
       bytes = [0x48, 0x65, 0x6C, 0x6C, 0x6F]
       expected_string = '' # TODO
 
-      assert string_from_bytes(bytes, encoding: ASCII) == expected_string.encode(ASCII)
+      assert bytes_to_string(bytes, as: ASCII) == expected_string.encode(ASCII)
     end
 
     specify 'ASCII string to bytes' do
@@ -78,7 +78,7 @@ class Utf8Challenges < Minitest::Test
       bytes = [0x63, 0x61, 0x66, 0xE9]
       expected_string = '' # TODO
 
-      assert string_from_bytes(bytes, encoding: ISO_8859_1) == expected_string.encode(ISO_8859_1)
+      assert bytes_to_string(bytes, as: ISO_8859_1) == expected_string.encode(ISO_8859_1)
     end
 
     specify 'ISO-8859-1 string to bytes' do
@@ -132,7 +132,7 @@ class Utf8Challenges < Minitest::Test
       codepoints = [0x3C0, 0x20, 0x2248, 0x20, 0x33]
       expected_string = '' # TODO
 
-      assert string_from_codepoints(codepoints) == expected_string
+      assert codepoints_to_string(codepoints) == expected_string
     end
 
     specify 'code points to Unicode string' do
@@ -238,7 +238,7 @@ class Utf8Challenges < Minitest::Test
         ]
       expected_string = '' # TODO
 
-      assert string_from_bytes(bytes, encoding: UTF_32) == expected_string.encode(UTF_32)
+      assert bytes_to_string(bytes, as: UTF_32) == expected_string.encode(UTF_32)
     end
 
     specify 'UTF-32 string to bytes' do
@@ -343,7 +343,7 @@ class Utf8Challenges < Minitest::Test
       bytes = [0x49, 0x20, 0xE2, 0x9D, 0xA4, 0x20, 0xF0, 0x9F, 0x8D, 0x95]
       expected_string = '' # TODO
 
-      assert string_from_bytes(bytes, encoding: UTF_8) == expected_string.encode(UTF_8)
+      assert bytes_to_string(bytes, as: UTF_8) == expected_string.encode(UTF_8)
     end
 
     specify 'UTF-8 string to bytes' do
@@ -361,10 +361,10 @@ end
 BYTES_PACK_TEMPLATE = 'C*' # zero or more unsigned 8-bit integers
 CODEPOINTS_PACK_TEMPLATE = 'U*' # zero or more Unicode code points
 
-def string_from_bytes(bytes, encoding:)
-  bytes.pack(BYTES_PACK_TEMPLATE).force_encoding(encoding)
+def bytes_to_string(bytes, as:)
+  bytes.pack(BYTES_PACK_TEMPLATE).force_encoding(as)
 end
 
-def string_from_codepoints(codepoints)
+def codepoints_to_string(codepoints)
   codepoints.pack(CODEPOINTS_PACK_TEMPLATE)
 end
