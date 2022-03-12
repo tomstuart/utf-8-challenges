@@ -109,6 +109,12 @@ class Utf8Challenges < Minitest::Test
     # the ASCII characters. (For backwards compatibility, the Basic Latin code
     # points are identical to ASCII.)
 
+    # Unicode also introduces a standard notation for code points. They’re
+    # written as “U+” followed by at least four hexadecimal digits, padded with
+    # leading zeros if necessary. So the Unicode code point for “A”, 0x41, is
+    # usually written U+0041. The “U+” part makes it clear that it’s a Unicode
+    # code point rather than a generic hexadecimal number.
+
     # Clearly not all 144,697 code points can fit in a single byte; the largest
     # ones require 21 bits (almost 3 bytes). Unicode itself doesn’t specify how
     # to represent code points as bytes, so we’ll just think about code points
@@ -168,8 +174,9 @@ class Utf8Challenges < Minitest::Test
 
     # Example 1: “A”
     #
-    # The Unicode code point for “A” is 0x41 (0b1000001), the same as in ASCII.
-    # To represent this in UTF-32 we begin with a template of four blank bytes:
+    # The Unicode code point for “A” is U+0041 (0b1000001), the same as in
+    # ASCII. To represent this in UTF-32 we begin with a template of four
+    # blank bytes:
     #
     #   ________ ________ ________ ________
     #
@@ -185,7 +192,7 @@ class Utf8Challenges < Minitest::Test
     # The first three bytes were completely unused by the code point and so
     # contain all zeros.
     #
-    # So the UTF-32 encoding of 0x41 is [0b00000000, 0b00000000, 0b00000000,
+    # So the UTF-32 encoding of U+0041 is [0b00000000, 0b00000000, 0b00000000,
     # 0b01000001], or [0x00, 0x00, 0x00, 0x41] in hexadecimal:
     #
     #   >> puts [0x00, 0x00, 0x00, 0x41].pack('C*').force_encoding(Encoding::UTF_32BE)
@@ -193,7 +200,7 @@ class Utf8Challenges < Minitest::Test
 
     # Example 2: “😭”
     #
-    # The Unicode code point for “😭” is 0x1F62D (0b11111011000101101). We
+    # The Unicode code point for “😭” is U+1F62D (0b11111011000101101). We
     # start with four blank bytes again…
     #
     #   ________ ________ ________ ________
@@ -209,7 +216,7 @@ class Utf8Challenges < Minitest::Test
     # In this case, the code point is larger and its bits have spilled over
     # into the second and third bytes, but the first byte is still all zeros.
     #
-    # So the UTF-32 encoding of 0x1F62D is [0b00000000, 0b00000001, 0b11110110,
+    # So the UTF-32 encoding of U+1F62D is [0b00000000, 0b00000001, 0b11110110,
     # 0b00101101], or [0x00, 0x01, 0xF6, 0x2D] in hexadecimal:
     #
     #   >> puts [0x00, 0x01, 0xF6, 0x2D].pack('C*').force_encoding(Encoding::UTF_32BE)
@@ -281,7 +288,7 @@ class Utf8Challenges < Minitest::Test
 
     # Example: “€”
     #
-    # The Unicode code point for “€” is 0x20AC, or 0b10000010101100 in binary,
+    # The Unicode code point for “€” is U+20AC, or 0b10000010101100 in binary,
     # which is 14 bits long. So we start with the three-byte template (for code
     # points 12–16 bits long)…
     #
@@ -296,7 +303,7 @@ class Utf8Challenges < Minitest::Test
     #
     #   11100010 10000010 10101100
     #
-    # So the UTF-8 encoding of 0x20AC is [0b11100010, 0b10000010, 0b10101100],
+    # So the UTF-8 encoding of U+20AC is [0b11100010, 0b10000010, 0b10101100],
     # or [0xE2, 0x82, 0xAC] in hexadecimal:
     #
     #   >> puts [0xE2, 0x82, 0xAC].pack('C*').force_encoding(Encoding::UTF_8)
