@@ -123,7 +123,7 @@ class Utf8Challenges < Minitest::Test
       skip
 
       # tip: https://www.fileformat.info/info/unicode/char/search.htm
-      codepoints = [0x03C0, 0x20, 0x2248, 0x20, 0x33]
+      codepoints = [0x3C0, 0x20, 0x2248, 0x20, 0x33]
       expected_string = '' # TODO
 
       assert string_from_codepoints(codepoints) == expected_string
@@ -168,9 +168,8 @@ class Utf8Challenges < Minitest::Test
 
     # Example 1: “A”
     #
-    # The Unicode code point for “A” is 0x41 (0b01000001), the same as in
-    # ASCII. To represent this in UTF-32 we begin with a template of four blank
-    # bytes:
+    # The Unicode code point for “A” is 0x41 (0b1000001), the same as in ASCII.
+    # To represent this in UTF-32 we begin with a template of four blank bytes:
     #
     #   ________ ________ ________ ________
     #
