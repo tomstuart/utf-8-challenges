@@ -187,7 +187,7 @@ class Utf8Challenges < Minitest::Test
     # contain all zeros.
     #
     # So the UTF-32 encoding of 0x41 is [0b00000000, 0b00000000, 0b00000000,
-    # 0b01000001], or [0x00, 0x00, 0x00, 0x41] in hex:
+    # 0b01000001], or [0x00, 0x00, 0x00, 0x41] in hexadecimal:
     #
     #   >> puts [0x00, 0x00, 0x00, 0x41].pack('C*').force_encoding(Encoding::UTF_32BE)
     #   A
@@ -211,7 +211,7 @@ class Utf8Challenges < Minitest::Test
     # into the second and third bytes, but the first byte is still all zeros.
     #
     # So the UTF-32 encoding of 0x1F62D is [0b00000000, 0b00000001, 0b11110110,
-    # 0b00101101], or [0x00, 0x01, 0xF6, 0x2D] in hex:
+    # 0b00101101], or [0x00, 0x01, 0xF6, 0x2D] in hexadecimal:
     #
     #   >> puts [0x00, 0x01, 0xF6, 0x2D].pack('C*').force_encoding(Encoding::UTF_32BE)
     #   😭
@@ -298,7 +298,7 @@ class Utf8Challenges < Minitest::Test
     #   11100010 10000010 10101100
     #
     # So the UTF-8 encoding of 0x20AC is [0b11100010, 0b10000010, 0b10101100],
-    # or [0xE2, 0x82, 0xAC] in hex:
+    # or [0xE2, 0x82, 0xAC] in hexadecimal:
     #
     #   >> puts [0xE2, 0x82, 0xAC].pack('C*').force_encoding(Encoding::UTF_8)
     #   €
