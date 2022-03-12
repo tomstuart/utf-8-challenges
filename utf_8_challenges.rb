@@ -40,18 +40,18 @@ class Utf8Challenges < Minitest::Test
       skip
 
       bytes = [0x48, 0x65, 0x6C, 0x6C, 0x6F]
-      expected_string = ''.encode(ASCII) # TODO
+      expected_string = '' # TODO
 
-      assert string_from_bytes(bytes, encoding: ASCII) == expected_string
+      assert string_from_bytes(bytes, encoding: ASCII) == expected_string.encode(ASCII)
     end
 
     specify 'ASCII string to bytes' do
       skip
 
-      string = 'world'.encode(ASCII)
+      string = 'world'
       expected_bytes = [] # TODO
 
-      assert string.bytes == expected_bytes
+      assert string.encode(ASCII).bytes == expected_bytes
     end
   end
 
@@ -76,18 +76,18 @@ class Utf8Challenges < Minitest::Test
       skip
 
       bytes = [0x63, 0x61, 0x66, 0xE9]
-      expected_string = ''.encode(ISO_8859_1) # TODO
+      expected_string = '' # TODO
 
-      assert string_from_bytes(bytes, encoding: ISO_8859_1) == expected_string
+      assert string_from_bytes(bytes, encoding: ISO_8859_1) == expected_string.encode(ISO_8859_1)
     end
 
     specify 'ISO-8859-1 string to bytes' do
       skip
 
-      string = '£50'.encode(ISO_8859_1)
+      string = '£50'
       expected_bytes = [] # TODO
 
-      assert string.bytes == expected_bytes
+      assert string.encode(ISO_8859_1).bytes == expected_bytes
     end
   end
 
@@ -236,18 +236,18 @@ class Utf8Challenges < Minitest::Test
           0x00, 0x00, 0x00, 0x20,
           0x00, 0x00, 0x00, 0x33
         ]
-      expected_string = ''.encode(UTF_32) # TODO
+      expected_string = '' # TODO
 
-      assert string_from_bytes(bytes, encoding: UTF_32) == expected_string
+      assert string_from_bytes(bytes, encoding: UTF_32) == expected_string.encode(UTF_32)
     end
 
     specify 'UTF-32 string to bytes' do
       skip
 
-      string = '⌘C ⌘V'.encode(UTF_32)
+      string = '⌘C ⌘V'
       expected_bytes = [] # TODO
 
-      assert string.bytes == expected_bytes
+      assert string.encode(UTF_32).bytes == expected_bytes
     end
   end
 
@@ -341,18 +341,18 @@ class Utf8Challenges < Minitest::Test
       skip
 
       bytes = [0x49, 0x20, 0xE2, 0x9D, 0xA4, 0x20, 0xF0, 0x9F, 0x8D, 0x95]
-      expected_string = ''.encode(UTF_8) # TODO
+      expected_string = '' # TODO
 
-      assert string_from_bytes(bytes, encoding: UTF_8) == expected_string
+      assert string_from_bytes(bytes, encoding: UTF_8) == expected_string.encode(UTF_8)
     end
 
     specify 'UTF-8 string to bytes' do
       skip
 
-      string = 'Voilà! 🎉'.encode(UTF_8)
+      string = 'Voilà! 🎉'
       expected_bytes = [] # TODO
 
-      assert string.bytes == expected_bytes
+      assert string.encode(UTF_8).bytes == expected_bytes
     end
   end
 end
